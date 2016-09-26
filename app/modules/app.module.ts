@@ -4,17 +4,17 @@ import { FormsModule }		from '@angular/forms';
 import { HttpModule }		from '@angular/http';
 
 import { InMemoryWebApiModule }	from 'angular2-in-memory-web-api';
-import { InMemoryDataService }	from './in-memory-data.service';
+import { InMemoryDataService }	from '../services/in-memory-data.service';
 
-import './rxjs-extensions';
+import '../rxjs-extensions';
 
-import { AppComponent }			from './app.component';
-import { HeroDetailComponent }	from './hero-detail.component';
-import { HeroService}			from './hero.service';
-import { HeroesComponent }		from './heroes.component';
-import { routing }				from './app.routing';
-import { DashboardComponent }	from './dashboard.component';
-import { HeroSearchComponent }	from './hero-search.component';
+import { AppComponent }			from '../components/app.component';
+import { HeroDetailComponent }	from '../components/hero-detail.component';
+import { HeroService}			from '../services/hero.service';
+import { HeroesComponent }		from '../components/heroes.component';
+import { routing }				from '../routes/app.routing';
+import { DashboardComponent }	from '../components/dashboard.component';
+import { HeroSearchComponent }	from '../components/hero-search.component';
 
 @NgModule({
 	imports: [
