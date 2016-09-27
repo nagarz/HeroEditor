@@ -20,7 +20,7 @@ const appRoutes: Routes = [
 		pathMatch: 'full'
 	},
 	{
-		path: 'detail/:id',
+		path: 'detail/:hid',
 		component: HeroDetailComponent
 	}
 ];

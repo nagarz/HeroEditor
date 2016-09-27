@@ -18,11 +18,12 @@ export class DashboardComponent implements OnInit {
 	}
 	
 	ngOnInit(): void {
-		this.heroService.getHeroes().then(heroes => this.heroes = heroes.slice(0, 4));
+		this.heroService.getHeroes().then(heroes => this.heroes = heroes.slice(1, 4));
+		//this.heroService.getHeroes().then(heroes => this.heroes = heroes);
 	}
 	
 	gotoDetail(hero: Hero): void{
-		let link = ['/detail', hero.id];
+		let link = ['/detail', hero.hid];
 		this.router.navigate(link);
 	}
 	

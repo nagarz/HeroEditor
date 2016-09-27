@@ -8,14 +8,18 @@ import { Hero } 	from '../model/hero';
 @Injectable()
 export class HeroService {
 
-	private heroesUrl = 'app/heroes';
+	//private getHeroesUrl = 'app/heroes';
 	private headers = new Headers({'Content-Type': 'application/json'});
+	private createHeroUrl = 'http://localhost:3333/api/create-hero';
+	private getHeroesUrl = 'http://localhost:3333/api/heroes';
+	private updateHeroUrl = 'http://localhost:3333/api/update-hero';
+	private deleteHeroUrl = 'http://localhost:3333/api/delete-hero';
 	
 	constructor(private http: Http) {
 	}
 
 	getHeroes(): Promise<Hero[]> {
-		return this.http.get(this.heroesUrl).toPromise().then(response => response.json().data as Hero[]).catch(this.handleError);
+		return this.http.get(this.getHeroesUrl).toPromise().then(response => response.json().data as Hero[]).catch(this.handleError);
 	}
 	
 	getHeroesSlowly(): Promise<Hero[]> {
@@ -24,8 +28,8 @@ export class HeroService {
 		.then(() => this.getHeroes());
 	}
 	
-	getHero(id: number): Promise<Hero> {
-		return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
+	getHero(hid: number): Promise<Hero> {
+		return this.getHeroes().then(heroes => heroes.find(hero => hero.hid === hid));
 	}
 	
 	private handleError(error: any): Promise<any> {
@@ -34,20 +38,21 @@ export class HeroService {
 	}
 	
 	update(hero: Hero): Promise<Hero> {
-		const url = `${this.heroesUrl}/${hero.id}`;
+		const url = `${this.updateHeroUrl}/${hero.hid}`;
 		return this.http.put(url, JSON.stringify(hero), {headers: this.headers}).toPromise().then(() => hero).catch(this.handleError);
 	}
 	
 	create(name: string): Promise<Hero> {
 		return this.http
-			.post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+			.post(this.createHeroUrl, JSON.stringify({name: name}), {headers: this.headers})
 			.toPromise()
 			.then(res => res.json().data)
 			.catch(this.handleError);
 	}
 	
-	delete(id: number): Promise<void> {
-		let url = `${this.heroesUrl}/${id}`;
+	delete(hid: number): Promise<void> {
+		let url = `${this.deleteHeroUrl}/${hid}`;
+		console.log(url);
 		return this.http.delete(url, {headers: this.headers}).toPromise().then(() => null).catch(this.handleError);
 	}
 	
